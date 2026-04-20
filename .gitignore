@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+venv3/
+ENV/
+.env
+.pytest_cache/
+coverage.xml
+htmlcov/
+.pytest_cache/
+
+# Coverage report
+coverage_report/
+.coverage
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear in the root
+Icon?
+
+# Mac metadata
+.Spotlight-V100
+.Trashes
+"ehthumbs.db"
+"Thumbs.db"
