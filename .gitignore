@@ -13,6 +13,8 @@ ENV/
 coverage.xml
 htmlcov/
 .pytest_cache/
+tests
+*.conf
 
 # Coverage report
 coverage_report/
