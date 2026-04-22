@@ -70,10 +70,7 @@ def main(args: list[str]) -> None:
             continue
 
         # C.B.A -> A, B.A, C.B.A
-        hostname_parts = target_hostname.split(".")
-        root_query = hostname_parts[-1]
-        tld_query = f"{hostname_parts[-2]}.{root_query}"
-        auth_query = target_hostname
+        root_query, tld_query, auth_query = split_hostname(target_hostname)
 
         resolve_hostname(root_port, root_query, tld_query, auth_query)
 
