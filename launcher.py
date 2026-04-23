@@ -27,7 +27,7 @@ def generate_config_files(root_port: int, mapping: dict, taken_ports: set, direc
         auth_nameservers.add(auth)
         hostnames.add(hostname)
 
-    # Needs cleaning up further
+    # Needs cleaning up further -> inefficeint due to repeated loops
     with open(f"{directory_path}/root.conf", "w") as root_file:
         root_file.write(f"{root_port}\n")
 

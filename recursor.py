@@ -69,7 +69,6 @@ def main(args: list[str]) -> None:
             print("INVALID")
             continue
 
-        # C.B.A -> A, B.A, C.B.A
         root_query, tld_query, auth_query = split_hostname(target_hostname)
 
         resolve_hostname(root_port, root_query, tld_query, auth_query)
