@@ -1,7 +1,7 @@
 ## Project Overview
 
 nxdomain is a project designed to simulate a DNS infrastructure, containing the following components:
-- [recursor.py](recursor.py): A recursive resolver which queries servers to map a hostname to a port.
+- [recursor.py](recursor.py): A recursive resolver which queries servers to map a hostname to a port, which are cached for future lookups.
 - [server.py](server.py): Accepts socket connections to process queries. Stores a list of DNS records mapping full or partial hostnames to ports.
 - [launcher.py](launcher.py): Splits a master DNS record into sub-records used by root, TLD and authoritative DNS servers. Has the capacity to scale up root, TLD and authoritative [server.py](server.py) programs to fulfil DNS queries required by the master record.
 
@@ -25,6 +25,8 @@ Hostnames can be input into the CLI and will be resolved to a port as follows:
 If at any stage of the above process a port is unable to be resolved, the server will respond with `NXDOMAIN`, ending the lookup.
 
 As many hostnames can be entered as required before exiting, which is done by entering `CTRL-C` or `CTRL-D`.
+
+Once a hostname has been resolved, it is cached to improve future lookup speeds and reduce network traffic. Each hostname record comes with a time-to-live (TTL) to ensure that cached records are kept fresh. In this implementation, the caching expiry is maintained using multithreading.
 
 
 ## DNS server
@@ -130,7 +132,7 @@ The following is a list of simplifications made compared to real-world DNS syste
 
 * The changes made to server records during runtime are not persisted.
 * Only one type of DNS record is allowed (equivalent of IPv4 records). CNAME for aliases MX for emails and AAAA for IPv6 are some common ones which could be included.
-* Caching of DNS resolutions is not utilized to improve lookup speeds. If implemented, it must include a time-to-live to ensure all cached records are kept fresh.
+* ~~Caching of DNS resolutions is not utilized to improve lookup speeds. If implemented, it must include a time-to-live to ensure all cached records are kept fresh.~~
 * Once a lookup has failed (NXDOMAIN recieved), the resolver does not attempt to find other servers which may have the necessary records.
 * Servers are single-threaded, meaning that only one connection can be held, reducing the efficiency of lookups.
 * No server redundancy is present. If one server fails some or all lookups will not be able to be resolved.
